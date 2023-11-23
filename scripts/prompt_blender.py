@@ -1,5 +1,6 @@
 import gradio as gr
 import modules
+import textwrap
 
 from modules import script_callbacks
 
@@ -15,20 +16,28 @@ def send_to_buttons_component(image_component, output_result_component):
         pass
 
 
+def build_prompt():
+    tmp_value = """
+        (best quality, masterpiece:1.2), ultra detailed
+        , BREAK
+        , silver hair, emerald eyes, beautiful elf
+        """
+    return textwrap.dedent(tmp_value)[1:-1]
+
+
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as ui_component:
         with gr.Tab("Blend"):
             with gr.Row():
                 with gr.Column():
                     # TODO: Output blend result for tags
-                    output_result_component = gr.Textbox(
-                        label="Prompt", interactive=False
-                    )
+                    output_component = gr.Interface(
+                        fn=build_prompt, inputs=None,  outputs="text")
                     hidden_image_component = gr.Image(
                         type="pil", elem_id="prompt_blender_hidden_image")
                     with gr.Row():
                         send_to_buttons_component(hidden_image_component,
-                                                  output_result_component)
+                                                  output_component)
                 with gr.Column():
                     # TODO: Input tags
                     gr.Markdown(
