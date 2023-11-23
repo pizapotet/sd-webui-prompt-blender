@@ -8,12 +8,8 @@ def send_to_buttons_component(image_component, output_result_component):
     try:
         send_to_buttons = modules.generation_parameters_copypaste.create_buttons(
             ["txt2img", "img2img", "inpaint", "extras"])
-        for tabname, button in send_to_buttons.items():
-            print(tabname)
-            params = ParamBinding(paste_button=button, tabname=tabname, source_text_component=output_result_component,
-                                  source_image_component=image_component, source_tabname=f"{tabname}_source_tabname")
-            modules.generation_parameters_copypaste.register_paste_params_button(
-                params)
+        modules.generation_parameters_copypaste.bind_buttons(
+            send_to_buttons, image_component, output_result_component)
         return send_to_buttons
     except:
         pass
