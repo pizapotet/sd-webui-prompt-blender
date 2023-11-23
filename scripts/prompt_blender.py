@@ -30,8 +30,12 @@ def on_ui_tabs():
         with gr.Tab("Blend"):
             with gr.Row():
                 with gr.Column():
-                    gr.Interface(
-                        fn=build_prompt, inputs=None, outputs="text")
+                    output_component = gr.Textbox(
+                        label="output", interactive=False
+                    )
+                    btn = gr.Button("Generate")
+                    btn.click(None, [], output_component,
+                              _js="(x) => x + 'foo'")
                 with gr.Column():
                     # TODO: Input tags
                     gr.Markdown(
