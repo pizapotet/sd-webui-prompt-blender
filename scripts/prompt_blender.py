@@ -35,7 +35,7 @@ def on_ui_tabs():
                     )
                     btn = gr.Button("Generate")
                     btn.click(None, [], output_component,
-                              _js="(x) => x + 'foo'")
+                              _js="(str) => onClickGenerate(str)")
                 with gr.Column():
                     # TODO: Input tags
                     gr.Markdown(
