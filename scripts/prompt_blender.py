@@ -30,14 +30,8 @@ def on_ui_tabs():
         with gr.Tab("Blend"):
             with gr.Row():
                 with gr.Column():
-                    # TODO: Output blend result for tags
-                    output_component = gr.Interface(
-                        fn=build_prompt, inputs=None,  outputs="text")
-                    hidden_image_component = gr.Image(
-                        type="pil", elem_id="prompt_blender_hidden_image")
-                    with gr.Row():
-                        send_to_buttons_component(hidden_image_component,
-                                                  output_component)
+                    gr.Interface(
+                        fn=build_prompt, inputs=None, outputs="text")
                 with gr.Column():
                     # TODO: Input tags
                     gr.Markdown(
