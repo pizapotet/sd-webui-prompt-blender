@@ -44,7 +44,7 @@ def on_ui_tabs():
                     btn = gr.Button("Generate")
                     btn.click(None, [], output_component,
                               _js="(str) => onClickGenerate(str)")
-                with gr.Column():
+                with gr.Column(elem_id="prompt_blender_input_container"):
                     # TODO: Input tags
                     for index in range(5):
                         tag_component(elem_id=f"prompt_blender_input_{index}")
