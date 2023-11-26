@@ -5,10 +5,11 @@
  * @returns {string}
  */
 function onClickGenerate(str) {
+    const separator = ", BREAK\n"
     const inputs = getTagInputs()
 
     // 空の文字列を除いて連結する
-    return inputs.filter(str => str.trim() !== "").join(", ");
+    return inputs.filter(str => str.trim() !== "").join(separator);
 }
 
 /**
