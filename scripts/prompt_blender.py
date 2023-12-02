@@ -1,6 +1,7 @@
 import gradio as gr
 import modules
 import textwrap
+import pandas as pd
 
 from modules import script_callbacks
 
@@ -33,6 +34,13 @@ def tag_component(elem_id):
     pass
 
 
+def get_prompts(text):
+    rows = [{'id': 1, 'name': "foo", "prompt": ""}]
+    df = pd.DataFrame(rows)
+    df.columns = ["id", "name", "prompt"]
+    return df
+
+
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as ui_component:
         with gr.Tab("Blend"):
@@ -51,12 +59,10 @@ def on_ui_tabs():
         with gr.Tab("Management"):
             with gr.Row():
                 # TODO: Edit and Serch tags
-                table_component = gr.Dataframe(
-                    headers=["id", "name", "prompt"],
-                    datatype=["number", "str", "str"],
-                    row_count=3,
-                    col_count=(3, "fixed"),
-                    interactive=True,
+                gr.Interface(
+                    fn=get_prompts,
+                    inputs="text",
+                    outputs="dataframe"
                 )
         return [(ui_component, "Prompt Blender", "prompt_blender")]
 
