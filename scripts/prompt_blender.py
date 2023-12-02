@@ -51,11 +51,12 @@ def on_ui_tabs():
         with gr.Tab("Management"):
             with gr.Row():
                 # TODO: Edit and Serch tags
-                gr.Markdown(
-                    """
-                        # Hello World!
-                        Start typing below to see the output.
-                        """
+                table_component = gr.Dataframe(
+                    headers=["id", "name", "prompt"],
+                    datatype=["number", "str", "str"],
+                    row_count=3,
+                    col_count=(3, "fixed"),
+                    interactive=True,
                 )
         return [(ui_component, "Prompt Blender", "prompt_blender")]
 
