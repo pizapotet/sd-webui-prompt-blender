@@ -35,10 +35,10 @@ def tag_component(elem_id):
 
 
 def get_prompts(text):
-    rows = [{'id': 1, 'name': "foo", "prompt": ""}]
+    rows = [{'id': 1, 'name': "foo", "prompt": "", "action": "<button onclick='console.log("'"onclick"'")'>button</button>"}]
     df = pd.DataFrame(rows)
-    df.columns = ["id", "name", "prompt"]
-    return df
+    df.columns = ["id", "name", "prompt", "action"]
+    return df.to_html(escape=False, render_links=True)
 
 
 def on_ui_tabs():
@@ -62,7 +62,7 @@ def on_ui_tabs():
                 gr.Interface(
                     fn=get_prompts,
                     inputs="text",
-                    outputs="dataframe"
+                    outputs="html",
                 )
         return [(ui_component, "Prompt Blender", "prompt_blender")]
 
